@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'admintools',
     'accounts',
     'appsettings',
-    'pages'
+    'pages',
+    'rooms'
 ]
 
 MIDDLEWARE = [

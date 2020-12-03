@@ -79,7 +79,7 @@ $(document).ready(function($) {
 			items: 1,
 			autoplay: true,
 			stagePadding: 0,
-			nav: true,
+			// nav: true,
 			navText: ['<span class="icon-arrow_back">', '<span class="icon-arrow_forward">'],
 			animateOut: 'fadeOut',
     	animateIn: 'fadeIn',

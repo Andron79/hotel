@@ -1,4 +1,9 @@
-from django.views.generic import TemplateView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+)
+
+from rooms.models import Room
 
 
 class IndexView(TemplateView):
@@ -7,3 +12,9 @@ class IndexView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'about.html'
+
+
+class RoomListView(ListView):
+    model = Room
+    template_name = 'rooms.html'
+    context_object_name = 'rooms'
