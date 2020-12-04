@@ -24,6 +24,7 @@ class Room(CoreModel):
         blank=False,
         verbose_name='Категория номера'
     )
+
     number = models.PositiveSmallIntegerField(
         verbose_name='№ Номера'
     )
@@ -43,6 +44,10 @@ class Room(CoreModel):
         verbose_name='Тип кровати',
         default='Двух местная'
     )
+    price = models.PositiveSmallIntegerField(
+        verbose_name='Цена номера',
+        default=0
+    )
     description = models.TextField(
         max_length=2500,
         verbose_name='Описание номера'
@@ -50,33 +55,31 @@ class Room(CoreModel):
 
     class Meta:
         verbose_name = 'Номер'
-        verbose_name_plural = 'Номерa'
+        verbose_name_plural = 'Все номерa'
 
     def __str__(self):
         return f'№_{self.number}'
 
-    # возвращает первую картинку среди дополнительных картинок товара
     def get_image(self):
+        """ возвращает первую картинку среди дополнительных картинок товара """
         image = self.roomgallery_set.first()
-        return image
+        return image.image.url
 
 
 class RoomGallery(CoreModel):
+    room = models.ForeignKey(
+        Room,
+        on_delete=models.CASCADE,
+        verbose_name='Галерея фото',
+    )
     image = models.ImageField(
         verbose_name='Фото номера',
         upload_to='rooms',
         blank=True,
     )
-    room = models.ForeignKey(
-        Room,
-        on_delete=models.SET_NULL,
-        verbose_name='Галерея фото',
-        null=True
-    )
+
     sorting = models.PositiveSmallIntegerField(
-        # auto_created=True,
         verbose_name='Сортировка фотографий',
-        blank=True,
         help_text='Сортировка по увеличению, начиная с 1. Фотография с наименьшим значением сортировки будет основной'
     )
 
@@ -88,13 +91,3 @@ class RoomGallery(CoreModel):
     def __str__(self):
         return f'фото_{self.id}'
 
-    def get_sorting(self):
-        return self.sorting
-
-    # def save(self, *args, **kwargs):
-    #     # print(self.sorting)
-    #     if self.get_sorting():
-    #         self.sorting = self.sorting + 1
-    #     # else:
-    #     #     self.sorting = 0
-    #     return super().save(*args, **kwargs)

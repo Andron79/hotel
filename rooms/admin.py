@@ -16,6 +16,15 @@ class RoomGalleryInLine(admin.StackedInline):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     """ Номера """
+
+    list_display = (
+        'number',
+        'category',
+        'size',
+        'price',
+        'bad_type',
+        'facilities',
+    )
     inlines = [
         RoomGalleryInLine,
     ]

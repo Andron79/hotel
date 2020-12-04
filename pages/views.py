@@ -18,3 +18,7 @@ class RoomListView(ListView):
     model = Room
     template_name = 'rooms.html'
     context_object_name = 'rooms'
+
+
+class ContactView(TemplateView):
+    template_name = 'contact.html'
